@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>YouTube Slide Extractor</h2>
+
+<form method="post">
+  <input type="text" name="yt" placeholder="YouTube link" required>
+  <button type="submit">Start</button>
+</form>
+
+<hr>
+
+{% for i in slides %}
+  <img src="/static/slides/{{i}}" width="600"><br><br>
+{% endfor %}
+
+</body>
+</html>

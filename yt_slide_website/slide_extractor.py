@@ -40,3 +40,4 @@ def extract_slides(youtube_url, output_dir):
         frame_index += 1
 
     cap.release()
+

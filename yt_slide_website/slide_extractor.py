@@ -1,9 +1,12 @@
-import cv2, os, subprocess, numpy as np, pytesseract
+import cv2, os, subprocess, numpy as np
 
 def extract_slides(youtube_url, output_dir):
     os.makedirs(output_dir, exist_ok=True)
 
-    subprocess.run(["yt-dlp", "-f", "mp4", "-o", "video.mp4", youtube_url])
+    subprocess.run(
+        ["yt-dlp", "-f", "mp4", "-o", "video.mp4", youtube_url],
+        check=True
+    )
 
     cap = cv2.VideoCapture("video.mp4")
     fps = int(cap.get(cv2.CAP_PROP_FPS))
@@ -30,11 +33,6 @@ def extract_slides(youtube_url, output_dir):
             if np.mean(diff) < 5:
                 frame_index += 1
                 continue
-
-        text = pytesseract.image_to_string(gray)
-        if len(text.strip()) < 30:
-            frame_index += 1
-            continue
 
         slide_count += 1
         cv2.imwrite(f"{output_dir}/slide_{slide_count}.jpg", frame)

@@ -4,7 +4,13 @@ def extract_slides(youtube_url, output_dir):
     os.makedirs(output_dir, exist_ok=True)
 
     subprocess.run(
-        ["yt-dlp", "-f", "mp4", "-o", "video.mp4", youtube_url],
+        [
+            "yt-dlp",
+            "-f", "best[ext=mp4]/best",
+            "--no-playlist",
+            "-o", "video.mp4",
+            youtube_url
+        ],
         check=True
     )
 
@@ -40,4 +46,3 @@ def extract_slides(youtube_url, output_dir):
         frame_index += 1
 
     cap.release()
-
